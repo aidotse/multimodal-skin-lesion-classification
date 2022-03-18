@@ -133,8 +133,6 @@ def get_df(data_dir, use_meta):
     df_train = pd.read_csv(os.path.join(data_dir, 'train.csv'))
     df_train['filepath'] = df_train['image_name'].apply(lambda x: os.path.join(data_dir, f'train/train', f'{x}.jpg'))
 
-    df_train['is_ext'] = 0
-
     # test data
     df_test = pd.read_csv(os.path.join(data_dir, 'test.csv'))
     df_test['filepath'] = df_test['image_name'].apply(lambda x: os.path.join(data_dir, f'test/test', f'{x}.jpg'))

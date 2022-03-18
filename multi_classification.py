@@ -22,20 +22,11 @@ class color:
    BOLD = '\033[1m'
    END = '\033[0m'
 
-class Identity(nn.Module):
-    def __init__(self):
-        super(Identity, self).__init__()
-        
-    def forward(self, x):
-        return x
 
 class MultilabelClassifier(nn.Module):
     def __init__(self):
         super().__init__()
-        #self.resnet = models.resnet34(pretrained=True)
-        #self.model_wo_fc = nn.Sequential(*(list(self.resnet.children())[:-1]))
-        self.efficient_net = EfficientNet.from_pretrained(model_name="efficientnet-b2", num_classes=2)
-        #self.model_wo_fc = nn.Sequential(*(list(self.efficient_net.children())[:-1]))
+        self.efficient_net = EfficientNet.from_pretrained(model_name="efficientnet-b2")
         inch = self.efficient_net._fc.in_features
         self.hair_dense = nn.Sequential(
             nn.Dropout(p=0.2),
@@ -61,7 +52,7 @@ class MultilabelClassifier(nn.Module):
             nn.Dropout(p=0.2),
             nn.Linear(in_features=inch, out_features=2)
         )
-        self.efficient_net._fc = Identity()
+        self.efficient_net._fc = nn.Identity()
 
     def forward(self, x):
         x = self.efficient_net(x)
