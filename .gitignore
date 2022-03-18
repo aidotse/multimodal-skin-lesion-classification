@@ -1,0 +1,13 @@
+*/pycache/
+*.pycache
+*.pyc
+
+*.jpg
+*.png
+*.csv
+
+*.pth
+*.ckpt
+
+weights/
+logs/
